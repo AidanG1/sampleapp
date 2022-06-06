@@ -3,7 +3,9 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
 
-urlpatterns = []
+urlpatterns = [
+    # … Your URLs
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
@@ -25,6 +27,7 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
+        path("pattern-library/", include("pattern_library.urls")),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar

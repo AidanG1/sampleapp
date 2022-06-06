@@ -1,0 +1,8 @@
+context:
+  button_content: Button
+  dispatch_name: button
+  variant: default
+  color: primary
+  shape: rounded
+  size: md
+  type: button

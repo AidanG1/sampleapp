@@ -12,6 +12,8 @@ root = Path(__file__) - 3
 env = Env()
 
 DEBUG = env.bool("DJANGO_DEBUG", False)
+if DEBUG:
+    X_FRAME_OPTIONS = "SAMEORIGIN"
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # Local time zone for this installation. Choices can be found here:
@@ -217,6 +219,7 @@ TEMPLATES = [
             "builtins": [
                 "django.templatetags.static",
                 "django_components.templatetags.component_tags",
+                "pattern_library.loader_tags",
             ],
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": CONTEXT_PROCESSORS,
