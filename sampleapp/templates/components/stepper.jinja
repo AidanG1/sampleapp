@@ -1,0 +1,57 @@
+{% set default_steps=[{'name': 'Step 1', 'description': 'Create Algorithmic Stablecoin', 'status': 'completed'},{'name': 'Step 2', 'description': 'Hype On Twitter', 'status': 'current'},{'name': 'Step 3', 'description': 'Profit, nothing can go wrong', 'status': 'upcoming'}] %}
+{% macro stepper(steps=default_steps, variant='line', color='primary', direction='horizontal') %}
+    {% if direction == vertical %}
+        {% set li_element %}
+        <li>
+        {% endset %}
+        {% set a_element %}
+        <a href="#"
+           class="group pl-4 py-2 flex flex-col border-l-4 border-{{ color }} hover:border-{{ color }}-focus md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4">
+        {% endset %}
+    {% else %}
+        {% set li_element %}
+        <li class="flex-1">
+        {% endset %}
+        {% set a_element %}
+    {% endset %}
+{% endif %}
+<nav aria-label="Progress">
+    {% if direction == 'vertical' %}
+        <ol role="list" class="space-y-4">
+        {% else %}
+            <ol role="list" class="space-y-4 flex space-y-0 space-x-8">
+            {% endif %}
+            {% for step in steps %}
+                {% if step.status == 'completed' %}
+                    {{ li_element }}
+                    <!-- Completed Step -->
+                    <a href="#"
+                       class="group pl-4 py-2 flex flex-col border-l-4 border-{{ color }} hover:border-{{ color }}-focus md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4">
+                        <span class="text-xs text-{{ color }} font-semibold tracking-wide uppercase group-hover:text-{{ color }}-focus">{{ step.name }}</span>
+                        <span class="text-sm font-medium">{{ step.description }}</span>
+                    </a>
+                </li>
+            {% elif step.status == 'current' %}
+                {{ li_element }}
+                <!-- Current Step -->
+                <a href="#"
+                   class="pl-4 py-2 flex flex-col border-l-4 border-{{ color }} md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
+                   aria-current="step">
+                    <span class="text-xs text-{{ color }} font-semibold tracking-wide uppercase">{{ step.name }}</span>
+                    <span class="text-sm font-medium">{{ step.description }}</span>
+                </a>
+            </li>
+        {% elif step.status == 'upcoming' %}
+            {{ li_element }}
+            <!-- Upcoming Step -->
+            <a href="#"
+               class="group pl-4 py-2 flex flex-col border-l-4 border-gray-200 hover:border-gray-300 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4">
+                <span class="text-xs text-gray-500 font-semibold tracking-wide uppercase group-hover:text-gray-700">{{ step.name }}</span>
+                <span class="text-sm font-medium">{{ step.description }}</span>
+            </a>
+        </li>
+    {% endif %}
+{% endfor %}
+</ol>
+</nav>
+{% endmacro %}
