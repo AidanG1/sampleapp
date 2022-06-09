@@ -101,5 +101,5 @@ PATTERN_LIBRARY = {
     "PATTERN_BASE_TEMPLATE_NAME": "patterns/base.jinja",
     # Any template in BASE_TEMPLATE_NAMES or any template that extends a template in
     # BASE_TEMPLATE_NAMES is a "page" and will be rendered as-is without being wrapped.
-    "BASE_TEMPLATE_NAMES": ["patterns/base_page.jinja"],
+    "BASE_TEMPLATE_NAMES": [],
 }
