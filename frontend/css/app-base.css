@@ -37,8 +37,4 @@
   h6 {
     @apply text-lg;
   }
-
-  ul {
-    @apply list-disc list-inside;
-  }
 }
