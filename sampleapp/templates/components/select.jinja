@@ -1,21 +1,21 @@
-{% macro select(name="Favorite Sith", options=['Darth Maul', 'Darth Vader'], help_text="From Star Wars!", status="") %}
+{% macro select(name="Favorite Darth", options=['Darth Bane', 'Darth Maul', 'Darth Plagueis', 'Darth Sidious', 'Darth Tenebrous', 'Darth Tyranus', 'Darth Vader'], help_text="From Star Wars!", status="") %}
     <div class="mt-1 relative"
          x-data="{ modelName: 'selected', open: false, anySelected: false, selectedIndex: -1, activeIndex: 0, items: [ {%- for option in options -%} {id: {{ loop.index }}, name: '{{ option }}' },{%- endfor -%} ] }">
         <button type="button"
-                class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary max-h-fit"
                 x-ref="button"
                 @click="open = !open"
                 aria-haspopup="listbox"
                 :aria-expanded="open"
                 aria-labelledby="listbox-label"
                 aria-expanded="true">
-            <legend class="transition"
-                    :class="anySelected ? '-mt-4 text-gray-700 text-xs ml-1 bg-white px-1 max-w-fit' : 'text-gray-600'">
+            <legend :class="anySelected ? '-translate-y-4 text-gray-700 text-xs bg-white px-1 max-w-fit m-0' : 'text-gray-600'"
+                    class="transition focus:text-primary">
                 {{ name }}
             </legend>
             <span x-show="anySelected"
                   x-text="selectedIndex >=0 ? items[selectedIndex].name : ''"
-                  class="block truncate text-gray-700"></span>
+                  class="block truncate text-gray-700 max-h-fit"></span>
             <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <svg version="1.1"
                      class="h-5 w-5 text-gray-400 transition"
