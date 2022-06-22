@@ -1,6 +1,7 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
 {% from 'components/toggle.jinja' import toggle, toggle_label %}
+{% from 'components/select.jinja' import select %}
 {% block title %}
     Components
 {% endblock title %}
@@ -77,6 +78,10 @@
             {{ toggle(color='info', size="normal", icon=True) }}
             {{ toggle(color='warning', size="normal", icon=True) }}
             {{ toggle(color='error', size="normal", icon=True) }}
+        </div>
+        <div>
+            <h2>Select</h2>
+            {{ select() }}
         </div>
     </div>
 {% endblock content %}
