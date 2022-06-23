@@ -3,7 +3,7 @@ need a way to get information from the macro
 default option index
 read-only, disabled, error
 #}
-{% macro select(name="Favorite Darth", options=['Darth Bane', 'Darth Maul', 'Darth Plagueis', 'Darth Sidious', 'Darth Tenebrous', 'Darth Tyranus', 'Darth Vader'], help_text="From Star Wars!", status="", read_only_index=0, placeholder="") %}
+{% macro select(name="Favorite Darth", options=['Darth Bane', 'Darth Maul', 'Darth Plagueis', 'Darth Sidious', 'Darth Tenebrous', 'Darth Tyranus', 'Darth Vader'], help_text="From Star Wars!", status="", read_only_index=0, placeholder="", error="") %}
     {% if status == 'disabled' %}
         <div class="mt-1 relative">
             <button type="button"
@@ -69,15 +69,15 @@ read-only, disabled, error
         <div class="mt-1 relative"
              x-data="{ modelName: 'selected', open: false, anySelected: false, selectedIndex: -1, activeIndex: 0, items: [ {%- for option in options -%} {id: {{ loop.index }}, name: '{{ option }}' },{%- endfor -%} ] }">
             <button type="button"
-                    class="bg-white relative w-full border border-gray-500 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary max-h-fit"
+                    class="bg-white relative w-full border {% if error != '' %} border-error-focus {% else %} border-gray-500 {% endif %} rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary max-h-fit"
                     x-ref="button"
                     @click="open = !open"
                     aria-haspopup="listbox"
                     :aria-expanded="open"
                     aria-labelledby="listbox-label"
                     aria-expanded="true">
-                <legend :class="anySelected || '{{ placeholder }}' !== ''  ? '-translate-y-4 text-gray-700 text-xs bg-white px-1 max-w-fit m-0' : 'text-gray-600'"
-                        class="transition focus:text-primary">
+                <legend :class="anySelected || '{{ placeholder }}' !== ''  ? '-translate-y-4 text-xs bg-white px-1 max-w-fit m-0 {% if error != '' %} text-error-focus {% else %} text-gray-700 {% endif %}' : '{% if error != '' %} text-error-focus {% else %} text-gray-600 {% endif %}'"
+                        class="transition">
                     {{ name }}
                 </legend>
                 <span x-text="selectedIndex >=0 || '{{ placeholder }}' !== '' ? (selectedIndex >=0 ? items[selectedIndex].name : '{{ placeholder }}') : ''"
@@ -180,9 +180,15 @@ read-only, disabled, error
                 {% endfor %}
             </ul>
             {% if help_text %}
-                <p class="text-gray-500">
-                    {{ help_text }}
-                </p>
+                {% if error != '' %}
+                    <p class="text-error-focus text-sm">
+                        {{ error }}
+                    </p>
+                {% else %}
+                    <p class="text-gray-500">
+                        {{ help_text }}
+                    </p>
+                {% endif %}
             {% endif %}
         </div>
     {% endif %}
