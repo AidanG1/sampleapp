@@ -83,6 +83,8 @@
             <h2>Select</h2>
             {{ select() }}
             {{ select(placeholder="Placeholder") }}
+            {{ select(status='disabled') }}
+            {{ select(status='read_only') }}
         </div>
     </div>
 {% endblock content %}
