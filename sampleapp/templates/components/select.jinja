@@ -1,4 +1,9 @@
-{% macro select(name="Favorite Darth", options=['Darth Bane', 'Darth Maul', 'Darth Plagueis', 'Darth Sidious', 'Darth Tenebrous', 'Darth Tyranus', 'Darth Vader'], help_text="From Star Wars!", status="") %}
+{#
+need a way to get information from the macro
+default option index
+read-only, disabled, error
+#}
+{% macro select(name="Favorite Darth", options=['Darth Bane', 'Darth Maul', 'Darth Plagueis', 'Darth Sidious', 'Darth Tenebrous', 'Darth Tyranus', 'Darth Vader'], help_text="From Star Wars!", status="", placeholder="") %}
     <div class="mt-1 relative"
          x-data="{ modelName: 'selected', open: false, anySelected: false, selectedIndex: -1, activeIndex: 0, items: [ {%- for option in options -%} {id: {{ loop.index }}, name: '{{ option }}' },{%- endfor -%} ] }">
         <button type="button"
@@ -9,13 +14,13 @@
                 :aria-expanded="open"
                 aria-labelledby="listbox-label"
                 aria-expanded="true">
-            <legend :class="anySelected ? '-translate-y-4 text-gray-700 text-xs bg-white px-1 max-w-fit m-0' : 'text-gray-600'"
+            <legend :class="anySelected || '{{ placeholder }}' !== ''  ? '-translate-y-4 text-gray-700 text-xs bg-white px-1 max-w-fit m-0' : 'text-gray-600'"
                     class="transition focus:text-primary">
                 {{ name }}
             </legend>
-            <span x-show="anySelected"
-                  x-text="selectedIndex >=0 ? items[selectedIndex].name : ''"
-                  class="block truncate text-gray-700 max-h-fit"></span>
+            <span x-text="selectedIndex >=0 || '{{ placeholder }}' !== '' ? (selectedIndex >=0 ? items[selectedIndex].name : '{{ placeholder }}') : ''"
+                  class="block truncate max-h-fit"
+                  :class="'{{ placeholder }}' !== '' && !anySelected ? 'text-gray-400' : 'text-gray-700'"></span>
             <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <svg version="1.1"
                      class="h-5 w-5 text-gray-400 transition"
