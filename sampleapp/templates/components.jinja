@@ -85,7 +85,14 @@
             {{ select(placeholder="Placeholder") }}
             {{ select(status='disabled') }}
             {{ select(status='read_only') }}
-            {{ select(error="Darth Plagueis the Wise") }}
+            <div x-data="{ selected: 'none' }"
+                 @error-select.window="selected = $event.detail">
+                <p>
+                    Selected: <span x-text="selected.name"></span>
+                </p>
+                {{ select(error="Darth Plagueis the Wise", dispatch_name="error-select") }}
+            </div>
         </div>
     </div>
+</div>
 {% endblock content %}
