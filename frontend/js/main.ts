@@ -2,7 +2,8 @@
 import "@/css/app-base.css";
 import "@/css/app-components.css";
 import "@/css/app-utilities.css";
-
+import focus from "@alpinejs/focus";
+import mask from "@alpinejs/mask";
 import "htmx.org";
 import Alpine from "alpinejs";
 
@@ -56,4 +57,6 @@ function dropdown(this: DropDown) {
 Alpine.data("dropdown", dropdown);
 
 window.Alpine = Alpine;
+Alpine.plugin(focus);
+Alpine.plugin(mask);
 Alpine.start();
