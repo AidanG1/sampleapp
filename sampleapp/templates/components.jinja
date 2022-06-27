@@ -1,6 +1,7 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
 {% from 'components/toggle.jinja' import toggle, toggle_label %}
+{% from 'components/input.jinja' import input %}
 {% block title %}
     Components
 {% endblock title %}
@@ -78,5 +79,9 @@
             {{ toggle(color='warning', size="normal", icon=True) }}
             {{ toggle(color='error', size="normal", icon=True) }}
         </div>
+    </div>
+    <div class="mb-2 mr-1">
+        <h2>Input</h2>
+        {{ input() }}
     </div>
 {% endblock content %}
