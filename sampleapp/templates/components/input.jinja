@@ -12,7 +12,7 @@
 {% macro input(label="How does Chewbacca Sound", type="text", help_text="Hwararagarwr", error="", model="input", color='primary', left_icon=default_left_icon, right_icon='') %}
     <div x-data="{ {{ model }}: ''}">
         <label class="absolute z-10 text-gray-400 transition"
-               :class="{{ model }}.length > 0 ? 'translate-y-1 translate-x-8' : 'translate-y-2 translate-x-10'">
+               :class="{{ model }}.length > 0 ? '-translate-y-2 translate-x-10 text-xs bg-white px-1' : 'translate-y-2 translate-x-10'">
             {{ label }}
         </label>
         <div class="mt-1 relative rounded-md shadow-sm">
@@ -33,6 +33,5 @@
                 </p>
             {% endif %}
         {% endif %}
-        <span x-text="{{ model }}"></span>
     </div>
 {% endmacro %}
