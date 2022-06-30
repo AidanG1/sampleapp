@@ -3,6 +3,7 @@ import "@/css/app-base.css";
 import "@/css/app-components.css";
 import "@/css/app-utilities.css";
 
+import collapse from "@alpinejs/collapse";
 import "htmx.org";
 import Alpine from "alpinejs";
 
@@ -56,4 +57,5 @@ function dropdown(this: DropDown) {
 Alpine.data("dropdown", dropdown);
 
 window.Alpine = Alpine;
+Alpine.plugin(collapse);
 Alpine.start();

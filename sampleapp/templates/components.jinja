@@ -1,6 +1,7 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
 {% from 'components/toggle.jinja' import toggle, toggle_label %}
+{% from 'components/accordion.jinja' import accordion %}
 {% block title %}
     Components
 {% endblock title %}
@@ -77,6 +78,13 @@
             {{ toggle(color='info', size="normal", icon=True) }}
             {{ toggle(color='warning', size="normal", icon=True) }}
             {{ toggle(color='error', size="normal", icon=True) }}
+        </div>
+        <div>
+            <h2>Accordion</h2>
+            {{ accordion() }}
+            {{ accordion(borders=False) }}
+            {{ accordion(color="warning", color_borders=True) }}
+            {{ accordion(borders=False, color="success", color_borders=True) }}
         </div>
     </div>
 {% endblock content %}
