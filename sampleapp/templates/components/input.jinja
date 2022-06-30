@@ -9,7 +9,7 @@
           clip-rule="evenodd"/>
 </svg>
 {% endset %}
-{% macro input(label="How does Chewbacca Sound", type="text", help_text="Hwararagarwr", error="", model="input", color='primary', status='', read_only_value='', left_icon=default_left_icon, right_icon='') %}
+{% macro input(label="How does Chewbacca Sound", help_text="Hwararagarwr", error="", model="input", color='primary', status='', read_only_value='', left_icon=default_left_icon, right_icon='') %}
     {% if status == 'disabled' %}
         <div x-id="['input']" class="cursor-not-allowed">
             <label class="absolute z-10 text-gray-400 translate-y-2 cursor-not-allowed {% if left_icon %}translate-x-10{% else %}translate-x-3{% endif %}"
@@ -22,7 +22,7 @@
                 </div>
                 <input :id="$id('input')"
                        disabled
-                       type="{{ type }}"
+                       type="text"
                        class="cursor-not-allowed shadow-sm focus:ring-{{ color }} focus:border-{{ color }} block w-full sm:text-sm border-gray-400 placeholder:text-gray-400 rounded-md {% if left_icon %} pl-10{% endif %} {% if right_icon %} pr-10{% endif %}"/>
                 <div class="cursor-not-allowed absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     {{ right_icon }}
@@ -52,7 +52,7 @@
                 </div>
                 <input :id="$id('input')"
                        disabled
-                       type="{{ type }}"
+                       type="text"
                        value="{{ read_only_value }}"
                        class="cursor-not-allowed shadow-sm focus:ring-{{ color }} focus:border-{{ color }} block w-full sm:text-sm border-gray-400 placeholder:text-gray-400 rounded-md {% if left_icon %} pl-10{% endif %} {% if right_icon %} pr-10{% endif %}"/>
                 <div class="cursor-not-allowed absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -81,7 +81,7 @@
             <div class="mt-1 relative rounded-md shadow-sm">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">{{ left_icon }}</div>
                 <input :id="$id('input')"
-                       type="{{ type }}"
+                       type="text"
                        class="shadow-sm {% if error %}focus:ring-error-focus border-error-focus{% else %}focus:ring-{{ color }} focus:border-{{ color }} border-gray-400{% endif %} block w-full sm:text-sm placeholder:text-gray-400 rounded-md {% if left_icon %} pl-10{% endif %} {% if right_icon %} pr-10{% endif %}"
                        x-model="{{ model }}"/>
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">{{ right_icon }}</div>
