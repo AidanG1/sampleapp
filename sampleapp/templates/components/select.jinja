@@ -1,8 +1,8 @@
 {% macro select(name="Favorite Darth", options=['Darth Bane', 'Darth Maul', 'Darth Plagueis', 'Darth Sidious', 'Darth Tenebrous', 'Darth Tyranus', 'Darth Vader'], help_text="From Star Wars!", status="", dispatch_name="select", read_only_index=0, placeholder="", error="") %}
     {% if status == 'disabled' %}
-        <div class="mt-1 relative">
+        <div class="relative">
             <button type="button"
-                    class="bg-white relative w-full border border-gray-500 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-not-allowed max-h-fit"
+                    class="bg-white relative w-full border border-gray-500 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-not-allowed max-h-min"
                     disabled
                     aria-labelledby="listbox-label">
                 <span class="block truncate text-gray-600">{{ name }}</span>
@@ -71,10 +71,10 @@
                     :aria-expanded="open"
                     aria-labelledby="listbox-label"
                     aria-expanded="true">
-                <legend :class="anySelected || '{{ placeholder }}' !== ''  ? '-translate-y-4 text-xs bg-white px-1 max-w-fit m-0 {% if error != '' %} text-error-focus {% else %} text-gray-700 {% endif %}' : '{% if error != '' %} text-error-focus {% else %} text-gray-600 {% endif %}'"
-                        class="transition">
+                <label :class="anySelected || '{{ placeholder }}' !== ''  ? 'absolute -top-2 text-xs bg-white -translate-x-1 px-1 max-w-fit m-0 {% if error != '' %} text-error-focus {% else %} text-gray-700 {% endif %}' : '{% if error != '' %} text-error-focus {% else %} text-gray-600 {% endif %}'"
+                       class="transition">
                     {{ name }}
-                </legend>
+                </label>
                 <span x-text="selectedIndex >=0 || '{{ placeholder }}' !== '' ? (selectedIndex >=0 ? items[selectedIndex].name : '{{ placeholder }}') : ''"
                       class="block truncate max-h-fit"
                       :class="'{{ placeholder }}' !== '' && !anySelected ? 'text-gray-400' : 'text-gray-700'"></span>
@@ -99,7 +99,7 @@
                 x-transition:leave="transition ease-in duration-100"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
-                class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                class="absolute z-10 w-full bg-white shadow-lg max-h-60 rounded-md p-1 gap-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                 x-max="1"
                 @click.away="open = false"
                 x-description="Select popover, show/hide based on select state."
@@ -110,7 +110,7 @@
                 {% for option in options %}
                     <li x-state:on="Highlighted"
                         x-state:off="Not Highlighted"
-                        class="cursor-default select-none relative py-2 pl-3 pr-9 text-gray-900"
+                        class="cursor-default select-none relative py-3 px-4 text-gray-900 rounded-sm"
                         x-description="Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation."
                         id="listbox-option-{{ loop.index0 }}"
                         role="option"
@@ -145,11 +145,11 @@
             </ul>
             {% if help_text %}
                 {% if error != '' %}
-                    <p class="text-error-focus text-sm">
+                    <p class="text-error-focus text-xs">
                         {{ error }}
                     </p>
                 {% else %}
-                    <p class="text-gray-500">
+                    <p class="text-gray-500 text-xs">
                         {{ help_text }}
                     </p>
                 {% endif %}
