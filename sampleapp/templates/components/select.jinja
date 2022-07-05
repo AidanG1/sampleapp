@@ -71,7 +71,7 @@
                     :aria-expanded="open"
                     aria-labelledby="listbox-label"
                     aria-expanded="true">
-                <label :class="anySelected || '{{ placeholder }}' !== ''  ? 'absolute -top-2 text-xs bg-white -translate-x-1 px-1 max-w-fit m-0 {% if error != '' %} text-error-focus {% else %} text-gray-700 {% endif %}' : '{% if error != '' %} text-error-focus {% else %} text-gray-600 {% endif %}'"
+                <label :class="anySelected || '{{ placeholder }}' !== ''  ? 'absolute -translate-y-4 text-xs bg-white -translate-x-1 px-1 max-w-fit m-0 {% if error != '' %} text-error-focus {% else %} text-gray-700 {% endif %}' : '{% if error != '' %} text-error-focus {% else %} text-gray-600 {% endif %}'"
                        class="transition">
                     {{ name }}
                 </label>
