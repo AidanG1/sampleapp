@@ -17,15 +17,15 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
 # CACHES
 # ------------------------------------------------------------------------------
-REDIS_HOST = env("REDIS_HOST")
-REDIS_PORT = env("REDIS_PORT")
+REDIS_URL = env("REDIS_URL")
+REDIS_PASSWORD = env("REDIS_PASSWORD", default="")
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}",
+        "LOCATION": REDIS_URL,
         "OPTIONS": {
             "IGNORE_EXCEPTIONS": True,
-            "PARSER_CLASS": "redis.connection.HiredisParser",
+            "PASSWORD": REDIS_PASSWORD,
         },
     }
 }

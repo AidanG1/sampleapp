@@ -1,20 +1,25 @@
-# fly.toml file generated on 2021-12-28T20:18:42-05:00
-
-app = "sampleapp"
-
+app = "sampleapptest-dev"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
-[build]
-  dockerfile = "compose/prod/django/Dockerfile"
+# [deploy]
+#   release_command = "python /app/manage.py migrate"
 
-[deploy]
-  release_command = "python /app/manage.py migrate"
+[build]
+  dockerfile = "Dockerfile"
+  build-target = "runtime"
 
 [env]
+  DJANGO_SECRET_KEY="!!! CHANGE ME !!!"
   PORT = "8080"
-  ALLOWED_HOSTS = "*"
+  DJANGO_ALLOWED_HOSTS="*"
+  DJANGO_AWS_ACCESS_KEY_ID=""
+  DJANGO_AWS_SECRET_ACCESS_KEY=""
+  DJANGO_AWS_STORAGE_BUCKET_NAME=""
+  DJANGO_AWS_S3_ENDPOINT_URL=""
+  SENTRY_DSN=""
+  REDIS_URL=""
 
 [experimental]
   allowed_public_ports = []
@@ -26,7 +31,6 @@ processes = []
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
-
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -45,3 +49,7 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+[[statics]]
+  guest_path = "/app/sampleapp/static"
+  url_prefix = "/static/"
