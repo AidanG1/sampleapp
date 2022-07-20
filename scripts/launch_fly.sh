@@ -14,6 +14,7 @@ for env in dev prod; do
     ## APP
     if [ "$env" = "prod" ]; then
         echo "You will be prompted WARN app flag 'sampleapptest-dev' does not match app name in config file 'sampleapptest'. Press y"
+        ## https://community.fly.io/t/work-around-prompts-dialogs-in-automated-environments/4963
     fi
     fly apps create --name $ORG_NAME -o $ORG_NAME
     echo "Created app $ORG_NAME in $ORG_NAME"
@@ -37,6 +38,8 @@ for env in dev prod; do
 
     ## REDIS
     ## verify that a directory called redis with fly.toml exists before running
+    ## if you get the error: Error failed to fetch an image or build from source: error connecting to docker: remote builder app unavailable
+    ## run fly apps destroy builder_name, then fly apps destroy the other apps in your org that have been created. Find these with fly apps list. Finally rerun this script.
     cd redis
     REDIS_NAME="$ORG_NAME-redis"
     fly apps create --name $REDIS_NAME --org $ORG_NAME
