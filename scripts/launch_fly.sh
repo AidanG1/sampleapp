@@ -18,7 +18,7 @@ for env in dev prod; do
     fi
     fly apps create --name $ORG_NAME -o $ORG_NAME
     echo "Created app $ORG_NAME in $ORG_NAME"
-    DJANGO_SECRET_KEY=`python -c 'import random; print("".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)]))'`
+    DJANGO_SECRET_KEY=`python -c 'import random; print("".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#%^&*(-_=+)") for i in range(50)]))'`
     echo "DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY"
     fly secrets set DJANGO_SECRET_KEY="$DJANGO_SECRET_KEY" -a $ORG_NAME
     echo "Set DJANGO_SECRET_KEY"
@@ -43,10 +43,10 @@ for env in dev prod; do
     cd redis
     REDIS_NAME="$ORG_NAME-redis"
     fly apps create --name $REDIS_NAME --org $ORG_NAME
-    fly volumes create redis_server --size 1 -r ord
-    REDIS_PASSWORD=`python -c 'import random; print("".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)]))'`
+    fly volumes create redis_server --size 1 -r ord -a $REDIS_NAME
+    REDIS_PASSWORD=`python -c 'import random; print("".join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#%^&*(-_=+)") for i in range(50)]))'`
     echo "REDIS_PASSWORD: $REDIS_PASSWORD"
-    fly secrets set REDIS_PASSWORD="$REDIS_PASSWORD"
+    fly secrets set REDIS_PASSWORD="$REDIS_PASSWORD" -a $REDIS_NAME
     fly deploy -a $REDIS_NAME -r ord
     echo "Deployed $REDIS_NAME"
 

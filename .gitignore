@@ -244,3 +244,6 @@ junit.xml
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+
+# fly testing scripts
+scripts/destroy.sh
